@@ -38,7 +38,7 @@
   $sql = $conn->prepare("INSERT INTO EBooksStudents (StudentName,ClassID,RedemptionCode,EBookID) VALUES (?,?,?,?);");
   $sql->bind_param("siii",$studentName,$classID,$redemptionCode,$eBookID);
   $sql->execute();
-  
+
   header('Location: ../pages/class.php?classID='.$classID.'&eBookID='.$eBookID);
 
   $conn->close();

@@ -4,14 +4,14 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>E-ssue</title>
-		<?php
-			$page = 'weeklyReport';
-			include('../php/head.php');
-		?>
-	</head>
-	<body id="weeklyReport">
+  <head>
+    <title>E-ssue</title>
+    <?php
+      $page = 'weeklyReport';
+      include('../php/head.php');
+    ?>
+  </head>
+  <body id="weeklyReport">
     <?php include('../php/getClassName.php'); ?>
 
     <?php include('../php/navbar.php'); ?>
@@ -37,5 +37,5 @@
     <script>
         generateDate();
     </script>
-	</body>
+  </body>
 </html>
