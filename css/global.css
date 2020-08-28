@@ -1,0 +1,1128 @@
+/**********
+ * GLOBAL *
+ **********/
+html, body {
+  font-family: 'Kalam', cursive;
+  height: 98vh;
+  margin: 0;
+  padding: 0;
+  background-color: #477187;
+  overflow-x: hidden;
+}
+div.info {
+  width: 100%;
+  text-align: center;
+}
+
+/* ERROR NOTIFICATIONS */
+div.errorNotification {
+  width: 75%;
+  height: auto;
+  padding: 15px;
+  z-index: 997;
+  opacity: 0.9;
+  position: fixed;
+  top: 2%;
+  left: 12%;
+  background-color: #598da8;
+  border: 1.5px solid #F25656;
+  transition: 0.25s opacity;
+}
+div.errorNotification:hover {
+  opacity: 1.0;
+}
+div.errorNotification-message {
+  float: left;
+  display: inline-block;
+}
+div.errorNotification h1 {
+  font-size: 3vh;
+  padding: 0;
+  margin: 0;
+  color: #F25656;
+}
+div.errorNotification p {
+  font-size: 2vh;
+  padding: 0;
+  margin: 0;
+  color: #ADD6EC;
+}
+div.errorNotification-button {
+  float: right;
+  display: inline-block;
+}
+div.errorNotification i {
+  color: #ADD6EC;
+  transition: 0.5s color;
+  vertical-align: middle;
+  font-size: 3vh;
+}
+div.errorNotification i:hover {
+  color: #F0F5F7;
+  cursor: pointer;
+}
+
+/* NAVBAR START */
+nav#navbar {
+  height: 65px;
+  width: 100%;
+  background-color: #355566;
+  padding: 5px 15px 5px 5px;
+  z-index: 995;
+  display: flex;
+  justify-content: space-between;
+}
+nav#navbar ul {
+  display: inline-block;
+  list-style-type: none;
+}
+nav#navbar ul li {
+  display: inline-block;
+  margin-right: 35px;
+  padding-bottom: 9px;
+}
+nav#navbar ul li.active {
+  border-bottom: 5px solid #6a98b1;
+}
+nav#navbar ul li.active a {
+  color: #6a98b1;
+}
+nav#navbar ul li a {
+  text-decoration: none;
+  font-family: 'Kalam', cursive;
+  font-size: 25px;
+  cursor: pointer;
+  color: #ADD6EC;
+  transition: 0.5s color
+}
+nav#navbar ul li a:hover {
+  color: #6a98b1;
+}
+nav#navbar ul div.dropdown {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+nav#navbar ul div.dropdown a.dropbtn {
+  font-size: 25px;
+  color: #ADD6EC;
+  border: none;
+  outline: none;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  margin-right: 27.5px;
+}
+nav#navbar ul div.dropdown div.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #6a98b1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 996;
+}
+nav#navbar ul div.dropdown div.dropdown-content a {
+  float: none;
+  color: #ADD6EC;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transition: 0.25s background-color;
+}
+nav#navbar ul div.dropdown div.dropdown-content a:hover {
+  background-color: #507f98;
+  cursor: pointer;
+}
+nav#navbar ul div.dropdown:hover div.dropdown-content {
+  display: block;
+}
+/* NAVBAR END */
+
+/******************
+ * UNIVERSAL MODAL *
+ ******************/
+div.modal {
+  /* set width, height, border, background-color, and other attributes of modal in ID of specific modal */
+  position: fixed;
+  /* initialize top and left position of element */
+  top: 0;
+  left: 0;
+  /* set initial posiition of modal for modal-open animation */
+  transform: translate(0,-110%);
+  -webkit-transform: translate(0,-110%);
+  /* set initial display & opacity of modal */
+  display: none;
+  opacity: 0.0;
+  /* move modal to front allowing content in modal to be interacted with */
+  z-index: 999;
+}
+div.modal i.fa-times {
+  float: right;
+  margin: 15px;
+  font-size: 30px;
+}
+div.modal i.fa-times:hover {
+  cursor: pointer;
+}
+.modal-open {
+  /* triggers modal-open animation */
+  animation: modal-open 0.5s ease-out forwards;
+  -webkit-animation: modal-open 0.5s ease-out forwards;
+}
+.modal-close {
+  /* triggers modal-close animation */
+  animation: modal-close 0.5s ease-out forwards;
+  -webkit-animation: modal-close 0.5s ease-out forwards;
+}
+@keyframes modal-open { /* modal-open animation */
+  0% {
+    transform: translate(0,-110%);
+    opacity: 0.0;
+  }
+  /* begin changing opacity at 50% in order to create a nicer looking animation */
+  50% { opacity: 0.0; }
+  100% {
+    transform: none;
+    opacity: 1.0;
+  }
+}
+@-webkit-keyframes modal-open { /* modal-open animation // -webkit- */
+  0% {
+    -webkit-transform: translate(0,-110%);
+    opacity: 0.0;
+  }
+  /* begin changing opacity at 50% in order to create a nicer looking animation */
+  50% { opacity: 0.0; }
+  100% {
+    -webkit-transform: none;
+    opacity: 1.0;
+  }
+}
+@keyframes modal-close { /* modal-close animation */
+  0% {
+    transform: none;
+    opacity: 1.0;
+  }
+  80% { opacity: 0.0; }
+  100% {
+    transform: translate(0,-110%);
+  }
+}
+@-webkit-keyframes modal-close { /* modal-close animation // -webkit- */
+  0% {
+    -webkit-transform: none;
+    opacity: 1.0;
+  }
+  80% { opacity: 0.0; }
+  100% {
+    -webkit-transform: translate(0,-110%);
+  }
+}
+div.modal-overlay { /* as modal is opened, overlay is displayed */
+  /* set background-color in ID of specific modal overlay */
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* initialize display & opacity */
+  opacity: 0.0;
+  display: none;
+  /* disables clickable objects in background as modal is opened */
+  z-index: 998;
+}
+.modal-overlay-open {
+  /* triggers modal-close animation */
+  animation: modal-overlay-open 0.5s ease-out forwards;
+  -webkit-animation: modal-overlay-open 0.5s ease-out forwards;
+}
+.modal-overlay-close {
+  /* triggers modal-close animation */
+  animation: modal-overlay-close 0.5s ease-out forwards;
+  -webkit-animation: modal-overlay-close 0.5s ease-out forwards;
+}
+@keyframes modal-overlay-open {
+  from {
+    opacity: 0.0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+@-webkit-keyframes modal-overlay-open {
+  from {
+    opacity: 0.0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+@keyframes modal-overlay-close {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
+@-webkit-keyframes modal-overlay-close {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
+/***********************
+ * END UNIVERSAL MODAL *
+ ***********************/
+
+/******************
+ * LOGIN/REGISTER *
+ ******************/
+div.credentials-modal {
+  width: 35%;
+  height: 60%;
+  background-color: #3e6376;
+  left: 33%;
+  top: 5%;
+  border-radius: 7.5px;
+}
+div.credentials-modal header {
+  width: 97%;
+  height: 10%;
+  padding: 1.5%;
+  background-color: #355566;
+  border-top-left-radius: 7.5px;
+  border-top-right-radius: 7.5px;
+  font-size: 3.5vh;
+  color: #ADD6EC;
+}
+div.credentials-modal header i {
+  color: #6a98b1;
+  transition: 0.5s color;
+  vertical-align: top;
+}
+div.credentials-modal header i:hover {
+  color: #ADD6EC;
+}
+div.credentials-modal section {
+  width: 100%;
+  height: 70%;
+  padding: 1.5%;
+}
+div.credentials-modal section form {
+  font-size: 1.5vh;
+  color: #ADD6EC;
+}
+div.credentials-modal section form p {
+  padding: 0;
+  margin: 0 0 0 1%;
+  font-size: 1.25vh;
+  color: #FF5252;
+  display: inline-block;
+}
+div.credentials-modal section form input[type="text"], div.credentials-modal section form input[type="email"], div.credentials-modal section form input[type="password"] {
+  border: none;
+  border-radius: 25px;
+  padding: 3px 5px 3px 10px;
+  width: 35%;
+  font-family: 'Kalam', cursive;
+  transition: 0.5s background-color;
+  margin-bottom: 5px;
+  display: block;
+}
+div.credentials-modal section form input:focus {
+  outline: none;
+  background-color: #C2C2C2;
+}
+div.credentials-modal section form input[type="submit"] {
+  padding: 5px 15px 5px 15px;
+  font-size: 1.5vh;
+  border: none;
+  border-radius: 5px;
+  margin-top: 15px;
+  font-family: 'Kalam', cursive;
+  transition: 0.5s background-color;
+}
+div.credentials-modal section form input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #C2C2C2;
+}
+div.credentials-modal footer {
+  width: 97%;
+  height: 10%;
+  padding: 1.5%;
+  background-color: #477187;
+  border-bottom-left-radius: 7.5px;
+  border-bottom-right-radius: 7.5px;
+}
+div.credentials-modal footer a {
+  text-decoration: none;
+  font-size: 2vh;
+  transition: 0.5s color;
+  color: #6a98b1;
+}
+div.credentials-modal footer a:hover {
+  color: #ADD6EC;
+}
+div.credentials-modal-overlay {
+  background-color: #000000;
+  opacity: 0.25;
+}
+
+/**************************
+ * CREATING CLASSES MODAL *
+ **************************/
+div.simple-modal {
+  width: 35%;
+  height: 60%;
+  background-color: #3e6376;
+  left: 33%;
+  top: 5%;
+  border-radius: 7.5px;
+}
+div.simple-modal header {
+  width: 97%;
+  height: 10%;
+  padding: 1.5%;
+  background-color: #355566;
+  border-top-left-radius: 7.5px;
+  border-top-right-radius: 7.5px;
+  font-size: 3.5vh;
+  color: #ADD6EC;
+}
+div.simple-modal header i {
+  color: #6a98b1;
+  transition: 0.5s color;
+  vertical-align: top;
+}
+div.simple-modal header i:hover {
+  color: #ADD6EC;
+}
+div.simple-modal section {
+  width: 100%;
+  height: 70%;
+  padding: 1.5%;
+}
+div.simple-modal section form {
+  font-size: 2.5vh;
+  color: #ADD6EC;
+}
+div.simple-modal section form input[type="text"], div.simple-modal section form input[type="email"], div.simple-modal section form input[type="password"] {
+  border: none;
+  border-radius: 25px;
+  padding: 5px 5px 5px 10px;
+  width: 35%;
+  font-family: 'Kalam', cursive;
+  transition: 0.5s background-color;
+  margin-bottom: 5px;
+}
+div.simple-modal section form input:focus {
+  outline: none;
+  background-color: #C2C2C2;
+}
+div.simple-modal section form input[type="submit"] {
+  padding: 5px 15px 5px 15px;
+  font-size: 1.5vh;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-family: 'Kalam', cursive;
+  transition: 0.5s background-color;
+}
+div.simple-modal section form input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #C2C2C2;
+}
+div.simple-modal-overlay {
+  background-color: #000000;
+  opacity: 0.25;
+}
+
+/***************
+ * welcome.php *
+ ***************/
+body#welcome {
+  text-align: center;
+  font-size: 50px;
+}
+body#welcome h1 {
+  color: #ADD6EC;
+}
+body#welcome button {
+  width: 250px;
+  height: 75px;
+  background-color: #E1E1E1;
+  border: none;
+  transition: 0.5s background-color;
+  /* text within button */
+  font-size: 25px;
+  font-family: 'Kalam', cursive;
+}
+body#welcome button:hover {
+  background-color: #BCBCBC;
+  cursor: pointer;
+}
+
+/************
+ * home.php *
+ ************/
+body#home div.info {
+  width: 40%;
+  text-align: center;
+  margin-left: 10%;
+  margin-top: 7.5%;
+  display: inline-block;
+  vertical-align: top;
+}
+body#home div.info h1 {
+  font-size: 5vh;
+  color: #ADD6EC;
+  margin-top: 12.5%;
+  opacity: 0;
+  -ms-transform: translateX(-200px); /* IE 9 */
+  -webkit-transform: translateX(-200px); /* Safari */
+  transform: translateX(-200px); /* Standard syntax */
+  animation: slide 0.75s ease-out 0.5s forwards, fadeIn 1.5s linear 0.5s forwards;
+  -webkit-animation: slide 0.75s ease-out 0.5s forwards, fadeIn 1.5s linear 0.5s forwards;
+}
+body#home div.info p {
+  font-size: 3vh;
+  color: #ADD6EC;
+  opacity: 0;
+  -ms-transform: translateX(-200px); /* IE 9 */
+  -webkit-transform: translateX(-200px); /* Safari */
+  transform: translateX(-200px); /* Standard syntax */
+  animation: slide 0.75s ease-out 0.65s forwards, fadeIn 1.5s linear 0.65s forwards;
+  -webkit-animation: slide 0.75s ease-out 0.65s forwards, fadeIn 1.5s linear 0.65s forwards;
+}
+body#home div.info button {
+  padding: 15px;
+  background-color: #E1E1E1;
+  border: none;
+  border-radius: 10px;
+  transition: 0.5s background-color;
+  /* text within button */
+  font-size: 2.5vh;
+  font-family: 'Kalam', cursive;
+  opacity: 0;
+  -ms-transform: translateX(-250px); /* IE 9 */
+  -webkit-transform: translateX(-250px); /* Safari */
+  transform: translateX(-250px); /* Standard syntax */
+  animation: slide 0.65s ease-out 0.8s forwards, fadeIn 2s linear 0.8s forwards;
+  -webkit-animation: slide 0.65s ease-out 0.8s forwards, fadeIn 2s linear 0.8s forwards;
+}
+body#home div.info button:hover {
+  background-color: #BCBCBC;
+  cursor: pointer;
+}
+body#home div.tabletSVG-container {
+  width: 30%;
+  display: inline-block;
+  position: relative;
+  float: right;
+  margin-right: 12.5%;
+  margin-top: 5%;
+  -ms-transform: rotate(10deg); /* IE 9 */
+  -webkit-transform: rotate(10deg); /* Safari */
+  transform: rotate(10deg);
+}
+body#home div.tabletSVG-container svg.tabletSVG {
+  stroke: #000000;
+  stroke-width: 0.3;
+  fill: none;
+  position: absolute;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Fill {
+  opacity: 0;
+  animation: fadeIn 0.5s linear 3s forwards;
+  -webkit-animation: fadeIn 0.5s linear 3s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-rim {
+  stroke-dasharray: 275;
+  stroke-dashoffset: 275;
+  animation: drawLine 0.75s linear 0.5s forwards;
+  -webkit-animation: drawLine 0.75s linear 0.5s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-3dRim {
+  stroke-dasharray: 150;
+  stroke-dashoffset: 150;
+  animation: drawLine 0.75s linear 0.75s forwards;
+  -webkit-animation: drawLine 0.75s linear 0.75s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-quarterDiv {
+  stroke-dasharray: 65;
+  stroke-dashoffset: 65;
+  animation: drawLine 0.5s linear 1s forwards;
+  -webkit-animation: drawLine 0.5s linear 1s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-3dQuarterDiv {
+  stroke-dasharray: 3;
+  stroke-dashoffset: 3;
+  animation: drawLine 0.1s linear 1.5s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.5s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-pageTurn {
+  stroke-dasharray: 175;
+  stroke-dashoffset: 175;
+  animation: drawLine 1s linear 1.0s forwards;
+  -webkit-animation: drawLine 1s linear 1.0s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-powerButton {
+  stroke-dasharray: 12;
+  stroke-dashoffset: 12;
+  animation: drawLine 0.5s linear 1.5s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.5s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline circle#tabletLine-homeButton {
+  stroke-dasharray: 13;
+  stroke-dashoffset: 13;
+  animation: drawLine 0.5s linear 1.5s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.5s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-1 {
+  stroke-dasharray: 55;
+  stroke-dashoffset: 55;
+  animation: drawLine 0.5s linear 0.75s forwards;
+  -webkit-animation: drawLine 0.5s linear 0.75s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-2-1 {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: drawLine 0.25s linear 0.85s forwards;
+  -webkit-animation: drawLine 0.25s linear 0.85s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-2-2 {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: drawLine 0.25s linear 1.05s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.05s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-3-1 {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: drawLine 0.35s linear 0.95s forwards;
+  -webkit-animation: drawLine 0.35s linear 0.95s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-3-2 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 1.3s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.3s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-4-1 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.15s linear 1.05s forwards;
+  -webkit-animation: drawLine 0.15s linear 1.05s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-4-2 {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: drawLine 0.5s linear 1.2s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.2s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-5 {
+  stroke-dasharray: 35;
+  stroke-dashoffset: 35;
+  animation: drawLine 0.5s linear 1.15s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.15s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-6-1 {
+  stroke-dasharray: 15;
+  stroke-dashoffset: 15;
+  animation: drawLine 0.25s linear 1.25s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.25s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-6-2 {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: drawLine 0.25s linear 1.5s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.5s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-7 {
+  stroke-dasharray: 35;
+  stroke-dashoffset: 35;
+  animation: drawLine 0.5s linear 1.6s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.6s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-8 {
+  stroke-dasharray: 35;
+  stroke-dashoffset: 35;
+  animation: drawLine 0.5s linear 1.7s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.7s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-9 {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: drawLine 0.5s linear 1.8s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.8s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-10 {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: drawLine 0.5s linear 1.9s forwards;
+  -webkit-animation: drawLine 0.5s linear 1.9s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-11 {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: drawLine 0.5s linear 2.0s forwards;
+  -webkit-animation: drawLine 0.5s linear 2.0s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-12 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 2.1s forwards;
+  -webkit-animation: drawLine 0.25s linear 2.1s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-13 {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: drawLine 0.5s linear 2.2s forwards;
+  -webkit-animation: drawLine 0.5s linear 2.2s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-14 {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: drawLine 0.5s linear 2.3s forwards;
+  -webkit-animation: drawLine 0.5s linear 2.3s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-15 {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: drawLine 0.5s linear 2.4s forwards;
+  -webkit-animation: drawLine 0.5s linear 2.4s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r1 {
+  stroke-dasharray: 5;
+  stroke-dashoffset: 5;
+  animation: drawLine 0.25s linear 0.75s forwards;
+  -webkit-animation: drawLine 0.25s linear 0.75s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r2 {
+  stroke-dasharray: 5;
+  stroke-dashoffset: 5;
+  animation: drawLine 0.25s linear 0.85s forwards;
+  -webkit-animation: drawLine 0.25s linear 0.85s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r3 {
+  stroke-dasharray: 5;
+  stroke-dashoffset: 5;
+  animation: drawLine 0.25s linear 0.95s forwards;
+  -webkit-animation: drawLine 0.25s linear 0.95s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r4 {
+  stroke-dasharray: 5;
+  stroke-dashoffset: 5;
+  animation: drawLine 0.25s linear 1.05s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.05s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r5 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 1.15s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.15s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r6 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 1.25s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.25s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r7 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 1.35s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.35s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r8 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 1.5s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.5s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r9 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 1.6s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.6s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r10 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 1.7s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.7s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r11 {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: drawLine 0.25s linear 1.8s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.8s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r12 {
+  stroke-dasharray: 15;
+  stroke-dashoffset: 15;
+  animation: drawLine 0.25s linear 1.9s forwards;
+  -webkit-animation: drawLine 0.25s linear 1.9s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r13 {
+  stroke-dasharray: 15;
+  stroke-dashoffset: 15;
+  animation: drawLine 0.25s linear 2s forwards;
+  -webkit-animation: drawLine 0.25s linear 2s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r14 {
+  stroke-dasharray: 17;
+  stroke-dashoffset: 17;
+  animation: drawLine 0.25s linear 2.1s forwards;
+  -webkit-animation: drawLine 0.25s linear 2.1s forwards;
+}
+body#home div.tabletSVG-container svg#tabletSVG-Outline path#tabletLine-r15 {
+  stroke-dasharray: 21;
+  stroke-dashoffset: 21;
+  animation: drawLine 0.25s linear 2.4s forwards;
+  -webkit-animation: drawLine 0.25s linear 2.4s forwards;
+}
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide {
+  to {
+    -ms-transform: translateX(0px); /* IE 9 */
+    -webkit-transform: translateX(0px); /* Safari */
+    transform: translateX(0px); /* Standard syntax */
+  }
+}
+/*************
+ * class.php *
+ *************/
+body#class div.info {
+  background-color: #38667E;
+  padding: 1.5vh;
+}
+body#class div.info h1 {
+  color: #ADD6EC;
+  font-size: 3.5vh;
+  padding: 0;
+  margin: 0;
+}
+body#class div#modalsInterface { display: none }
+body#class table, body#weeklyReport table {
+  font-family: 'Kalam', cursive;
+  border-collapse: collapse;
+  width: 100%;
+  max-height: 40%;
+  overflow-y: auto;
+  color: #ADD6EC;
+}
+body#class table tr th, body#class table tr td, body#weeklyReport table tr th, body#weeklyReport table tr td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+body#class table tr th, body#weeklyReport table tr th {
+  background-color: #38667E;
+  font-size: 2vh;
+}
+body#class table tr td, body#weeklyReport table tr td {
+  background-color: #598da8;
+  font-size: 1.75vh;
+}
+body#class table tr td button {
+  padding: 5px 15px 5px 15px;
+  font-size: 1.5vh;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Kalam', cursive;
+  transition: 0.5s background-color;
+}
+body#class table tr td button:hover {
+  cursor: pointer;
+  background-color: #C2C2C2;
+}
+body#class table div#addEBook-modal section form div {
+  max-height: 30%;
+  overflow-y: auto;
+}
+body#class div#classOptions {
+  width: 100%;
+}
+body#class div#studentsAsOptions {
+  max-height: 20vh;
+  max-width: 98%;
+  overflow-y: auto;
+}
+body#class button#addStudentBtn, body#class button#addEBookBtn, body#class div#classOptions button#viewWeeklyReportBtn, button.weeklyReportBtn, body#class div#classOptions button#viewModalsInterface, body#class div#classOptions button#viewDragAndDropInterface, body#class button#dragAndDrop-AddStudent, body#class button#dragAndDrop-AddEBook {
+  padding: 5px 15px 5px 15px;
+  margin: 10px 5px 10px 5px;
+  font-size: 2.5vh;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Kalam', cursive;
+  transition: 0.5s background-color;
+}
+body#class button#addStudentBtn:hover, body#class button#addEBookBtn:hover, body#class div#classOptions button#viewWeeklyReportBtn:hover, button.weeklyReportBtn:hover, body#class div#classOptions button#viewModalsInterface:hover, body#class div#classOptions button#viewDragAndDropInterface:hover, body#class button#dragAndDrop-AddStudent:hover, body#class button#dragAndDrop-AddEBook:hover {
+  cursor: pointer;
+  background-color: #C2C2C2;
+}
+body#class div#classOptions button#viewModalsInterface:focus, body#class div#classOptions button#viewDragAndDropInterface:focus {
+  outline: none;
+}
+body#class div#classOptions button#viewWeeklyReportBtn, body#class div#classOptions h1#viewInterface, body#class div#classOptions button#viewModalsInterface, body#class div#classOptions button#viewDragAndDropInterface { display: inline-block; }
+body#class div#classOptions h1#viewInterface {
+  margin: 0 0.5% 0 1%;
+  padding: 0;
+  color: #ADD6EC;
+}
+body#class div#classOptions button#viewWeeklyReportBtn {
+  float: right;
+  margin-right: 1%;
+}
+body#class button#dragAndDrop-AddStudent, body#class button#dragAndDrop-AddEBook {
+  float: right;
+  margin-right: 1%;
+}
+body#class input#search, body#class input#tableSearch {
+  width: 20%;
+  margin-top: 1vh;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  border-radius: 15px;
+  text-align: left;
+  font-family: 'Kalam', cursive;
+  font-size: 1.5vh;
+  display: block;
+}
+body#class input#search { margin-left: 1%; }
+body#class input#tableSearch { margin: 1% 0 0.5% 0.25%; }
+body#class div#dragAndDropInterface { display: none }
+body#class div#dragAndDropInterface select#eBooksDropdown {
+  padding: 5px;
+  margin: 0.5% 0 0 1%;
+  border-radius: 5px;
+  font-size: 1.5vh;
+  font-family: 'Kalam', cursive;
+  background-color: buttonface;
+}
+body#class div#dragAndDropInterface div#notAssigned-container, body#class div#dragAndDropInterface div#assigned-container {
+  height: auto;
+  display: inline-block;
+  color: #ADD6EC;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 0;
+  margin-top: 1%;
+}
+body#class div#dragAndDropInterface div#notAssigned-container {
+  width: 35%;
+  margin-left: 1%;
+  float: left;
+}
+body#class div#dragAndDropInterface div#assigned-container {
+  width: 58.5%;
+  margin-right: 1%;
+  float: right;
+}
+body#class div#dragAndDropInterface header, body#class div#dragAndDropInterface div, body#class div#dragAndDropInterface div#notAssigned-droppable {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 10px 0 10px 0;
+  font-size: 2.5vh;
+  font-weight: bold;
+  text-align: center;
+}
+body#class div#dragAndDropInterface header {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: #38667E;
+}
+body#class div#dragAndDropInterface header h2 {
+  font-size: 1.5vh;
+  padding: 0;
+  margin: 0;
+}
+body#class div#dragAndDropInterface div {
+  border-top: 1px solid #dddddd;
+  background-color: #598da8;
+  transition: background-color 0.5s;
+}
+body#class div#dragAndDropInterface div.draggableStudent:hover {
+  cursor: grab;
+  background-color: #387696;
+}
+body#class div#dragAndDropInterface div form input {
+  padding: 5px 10px 5px 10px;
+  border: none;
+  border-radius: 15px;
+  text-align: center;
+  font-family: 'Kalam', cursive;
+  font-size: 2vh;
+}
+body#class div#dragAndDropInterface div#notAssigned-container div form input { width: 7.5%; }
+body#class div#dragAndDropInterface div#notAssigned-container div form input.dragAndDrop-studentName { width: 30% }
+body#class div#dragAndDropInterface div#notAssigned-container div form input.dragAndDrop-redemptionCode { display: none }
+body#class div#dragAndDropInterface div#assigned-container div form input { width: 5% }
+body#class div#dragAndDropInterface div#assigned-container div form input.dragAndDrop-studentName { width: 20% }
+body#class div#dragAndDropInterface div#assigned-container div form input.dragAndDrop-redemptionCode { width: 25% }
+body#class div#dragAndDropInterface div form button[type="submit"] {
+  padding: 5px 15px 5px 15px;
+  margin-left: 2%;
+  font-size: 2vh;
+  border: none;
+  border-radius: 15px;
+  font-family: 'Kalam', cursive;
+  transition: 0.5s background-color;
+}
+body#class div#dragAndDropInterface div form button[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #C2C2C2;
+}
+body#class div#dragAndDropInterface div#notAssigned-container div#notAssigned-droppable, body#class div#dragAndDropInterface div#assigned-container div#assigned-droppable {
+  border: none;
+  border-top: 1px solid #dddddd;
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  background-color: #7495A6;
+  padding: 15px 0 5px 0;
+}
+body#class div#dragAndDropInterface div#notAssigned-container div#notAssigned-droppable:hover {
+  cursor: pointer;
+}
+body#class div#dragAndDropInterface div#notAssigned-container div#notAssigned-droppable img, body#class div#dragAndDropInterface div#assigned-container div#assigned-droppable img {
+  width: 3vh;
+  height: 3vh;
+}
+/********************
+ * weeklyReport.php *
+ ********************/
+body#weeklyReport h1 {
+  font-size: 2.5vh;
+  margin-left: 0.5%;
+  color: #ADD6EC;
+}
+/*************
+ * about.php *
+ *************/
+body#about h1 {
+  color: #ADD6EC;
+  margin-top: 8%;
+}
+
+/****************
+ * policies.php *
+ ****************/
+body#policies h1 {
+  color: #ADD6EC;
+  margin-top: 8%;
+}
+
+/***************
+ * contact.php *
+ ***************/
+body#contact h1 {
+  color: #ADD6EC;
+  margin-top: 10%;
+}
+/*************
+ * e-bot.php *
+ *************/
+html#E-BOT-HTML, body#E-BOT {
+  overflow: hidden;
+}
+body#E-BOT div.chat-container {
+  width: 40%;
+  height: 75%;
+  background-color: transparent;
+  border-radius: 10px;
+  position: absolute;
+  top: 15%;
+  left: 10%;
+}
+body#E-BOT div.chat-container div#chat {
+  width: 96%;
+  height: 80%;
+  padding: 2%;
+  font-size: 1.5vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #D4D4D4;
+  color: #000000;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+body#E-BOT div.chat-container div#chat p {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+body#E-BOT div.chat-container div#chat p.bot {
+  float: left;
+  text-align: left;
+}
+body#E-BOT div.chat-container div#chat p.user {
+  float: right;
+  text-align: right;
+}
+body#E-BOT div.chat-container div#chat p.bot span, body#E-BOT div.chat-container div#chat p.user span { font-weight: bold; }
+body#E-BOT div.chat-container textarea#userInput {
+  width: 97.75%;
+  height: 15.75%;
+  background-color: #b5b5b5;
+  color: #000000;
+  padding: 1%;
+  font-size: 1.5vh;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  resize: none;
+}
+body#E-BOT div.chat-container button#submitBtn, body#E-BOT div.chat-container button#clearBtn {
+  padding: 7.5px 10px 7.5px 10px;
+  background-color: #9D9D9D;
+  color: #505050;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.25vh;
+  font-weight: bold;
+  transition: background-color 0.5s;
+}
+body#E-BOT div.chat-container button#submitBtn {
+  position: absolute;
+  bottom: 0;
+  right: 2%;
+}
+body#E-BOT div.chat-container button#clearBtn {
+  position: absolute;
+  bottom: 0;
+  left: 2%;
+}
+body#E-BOT div.chat-container button#submitBtn:hover, body#E-BOT div.chat-container button#clearBtn:hover {
+  background-color: #858585;
+  cursor: pointer;
+}
+body#E-BOT img {
+  width: 70vh;
+  height: 85vh;
+  position: absolute;
+  bottom: -5vh;
+  right: 5vh;
+}
+/*********************
+ * documentation.php *
+ *********************/
+body#documentation iframe {
+  width: 40%;
+  height: 90%;
+  margin-top: 1%;
+  margin-left: 30%;
+}
